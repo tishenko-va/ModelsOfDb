@@ -1,0 +1,17 @@
+{% extends "first_task/menu.html" %}
+
+{% block pagename %}Магазин{% endblock %}
+
+{% block content %}
+<ul>
+{% for game in games %}
+    <div>
+        <p>{{ game.title }}| {{ game.description }}. Стоимость: {{ game.cost }}</p>
+        <button>Купить</button>
+    </div>
+
+{% endfor %}
+
+</ul>
+<a href="/">Назад на главную страницу</a>
+{% endblock %}
