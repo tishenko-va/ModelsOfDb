@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Game, Buyer
+from .models import Game, Buyer, News
 
 # Фильтрацию по полям size и cost.
 # Отображение полей title, cost и size при отображении всех полей списком.
@@ -24,6 +24,16 @@ class BuyerAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_per_page = 30
     readonly_fields = ('balance',)
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'content')
+    search_fields = ('title', )
+    list_per_page = 3
+    readonly_fields = ('date',)
+
+
+
 
 
 

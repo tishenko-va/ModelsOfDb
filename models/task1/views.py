@@ -4,6 +4,7 @@ from .forms import UserRegister
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.hashers import make_password
+from django.core.paginator import Paginator
 
 def main_page(request):
     return render(request, 'first_task/main_page.html')
@@ -77,3 +78,14 @@ def sign_up_by_html(request):
             return HttpResponse(f"Приветствуем, {username}!")
 
     return render(request, 'first_task/registration_page.html', context=info)
+
+def news(request):
+    news_list = News.objects.all().order_by('-date')
+    paginator = Paginator(news_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'news': page_obj,
+    }
+    return render(request, 'first_task/news.html', context)
+
